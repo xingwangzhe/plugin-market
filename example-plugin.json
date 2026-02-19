@@ -1,5 +1,6 @@
 {
   "id": "example-plugin",
+  "repo": "yourname/your-plugin-repo",
   "name": {
     "zh-CN": "示例插件",
     "en-US": "Example Plugin"
@@ -8,11 +9,19 @@
     "zh-CN": "这是一个完整的插件示例，包含所有可用字段",
     "en-US": "This is a complete plugin example with all available fields"
   },
+  "version": "1.0.0",
   "author": {
     "name": "Your Name",
     "url": "https://github.com/yourname"
   },
-  "github": "yourname/your-plugin-repo",
+  "icon_url": "icon.png",
+  "categories": ["utility"],
   "permissions": ["log", "storage", "ui"],
-  "icon_url": "icon.png"
+  "dependencies": ["Little100/theme-palette"],
+  "optional_dependencies": ["Little100/theme-widgets"],
+  "download_url": "https://example.com/your-plugin.zip",
+  "download_type": "release",
+  "release_asset": "plugin.zip",
+  "branch": "main",
+  "tags": ["example", "demo"]
 }

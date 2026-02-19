@@ -38,12 +38,12 @@ async function loadData() {
       .filter(r => r.status === 'fulfilled' && r.value?.id)
       .map(r => {
         const p = r.value;
-        // 从路径 plugins/username/plugin-id.json 推断 github 和 author
+        // 从路径 plugins/username/plugin-id/plugin-id.json 推断 repo 和 author
         const parts = p._path?.split('/'); // ["plugins","username","plugin-id","plugin-id.json"]
         const username = parts?.[1];
-        const pluginFile = parts?.[2];
-        if (username && pluginFile) {
-          if (!p.github) p.github = `${username}/${pluginFile}`;
+        const pluginFolder = parts?.[2];
+        if (username && pluginFolder) {
+          if (!p.repo) p.repo = `${username}/${pluginFolder}`;
           if (!p.author) p.author = { name: username, url: `https://github.com/${username}` };
         }
         return p;
@@ -150,7 +150,7 @@ function renderModal(plugin) {
   ).join('');
 
   const cats = (plugin.categories || []).map(c => escapeHtml(getCategoryLabel(c))).join(', ');
-  const downloadUrl = plugin.download_url || (plugin.github ? `https://github.com/${plugin.github}/releases/latest` : '#');
+  const downloadUrl = plugin.download_url || (plugin.repo ? `https://github.com/${plugin.repo}/releases/latest` : '#');
 
   body.innerHTML = `
     <div class="detail-header">
@@ -164,7 +164,7 @@ function renderModal(plugin) {
       </div>
     </div>
     <div class="detail-section"><h3>简介</h3><p class="detail-desc">${escapeHtml(desc)}</p></div>
-    ${plugin.github ? `<div class="detail-section"><h3>源代码</h3><p><a href="https://github.com/${escapeHtml(plugin.github)}" target="_blank">${escapeHtml(plugin.github)}</a></p></div>` : ''}
+    ${plugin.repo ? `<div class="detail-section"><h3>源代码</h3><p><a href="https://github.com/${escapeHtml(plugin.repo)}" target="_blank">${escapeHtml(plugin.repo)}</a></p></div>` : ''}
     ${permissionsHtml ? `<div class="detail-section"><h3>所需权限</h3><div class="detail-permissions">${permissionsHtml}</div></div>` : ''}
     <div class="detail-actions">
       <a href="${downloadUrl}" class="btn-download" target="_blank" rel="noreferrer">

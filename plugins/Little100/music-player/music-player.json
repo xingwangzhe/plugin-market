@@ -1,5 +1,6 @@
 {
   "id": "music-player",
+  "repo": "Little100/sealantern-music-player",
   "name": {
     "zh-CN": "音乐播放器",
     "en-US": "Music Player"
@@ -17,6 +18,8 @@
   ],
   "optional_dependencies": ["Little100/theme-palette"],
   "categories": [
-    "theme"
+    "theme",
+    "ui",
+    "utility"
   ]
 }
